@@ -1,3 +1,6 @@
+Nama : Elfin Sinaga
+NIM : 2409106024
+
 # Aplikasi Manajemen Inventaris Sederhana (PHP Native)
 
 Aplikasi ini adalah sistem manajemen inventaris dasar yang dibangun murni menggunakan PHP Native. Tujuannya adalah untuk melacak dan mengelola daftar barang atau aset secara digital.
@@ -70,7 +73,7 @@ Berikut adalah langkah-langkah lengkap untuk menjalankan aplikasi ini dari awal 
     * Sekarang Anda berada di dalam HeidiSQL. Buka file `setup.sql` (dari folder proyek Anda) menggunakan Notepad atau editor teks.
     * **Copy** seluruh isi dari file `setup.sql`.
     * **Paste** kode SQL tersebut ke dalam tab **"Query"** di HeidiSQL.
-    * Klik tombol **"Run"** (ikon segitiga biru ▶️) untuk mengeksekusi query.
+    * Klik tombol **"Run"** (ikon segitiga biru) untuk mengeksekusi query.
     * Query ini akan otomatis membuat database `db_inventaris` dan tabel `barang` beserta data contoh.
     * Tekan F5 (atau klik kanan > Refresh) di panel kiri untuk melihat database `db_inventaris` baru Anda.
 
@@ -133,3 +136,6 @@ $options = [
 ];
 
 // ... (Blok try-catch untuk membuat instance $pdo) ...
+```
+## Screenshot Website
+![Screenshot Aplikasi Inventaris](assets/screenshot.png)

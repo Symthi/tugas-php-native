@@ -1,12 +1,7 @@
 <?php
-/*
- * File: simpan.php
- * Deskripsi: FITUR Create - Logika simpan data
- */
 session_start();
 require_once 'config/database.php';
 
-// Hanya proses jika request method adalah POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 1. Ambil data
@@ -15,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jumlah = trim($_POST['jumlah']);
     $deskripsi = trim($_POST['deskripsi']) ?: null;
 
-    // 2. FITUR: Validasi Sisi Server
     $errors = [];
     if (empty($kode_barang)) {
         $errors[] = "Kode barang wajib diisi.";
@@ -29,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Jumlah harus berupa angka positif atau nol.";
     }
 
-    // 3. Jika ada error validasi, kembali ke form
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['old_input'] = $_POST;
@@ -37,9 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // 4. Jika validasi lolos, simpan ke DB
     try {
-        // FITUR Keamanan: SQL Injection dicegah dengan Prepared Statement
         $sql = "INSERT INTO barang (kode_barang, nama_barang, jumlah, deskripsi) 
                 VALUES (:kode, :nama, :jml, :desk)";
         $stmt = $pdo->prepare($sql);
@@ -50,13 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':desk' => $deskripsi
         ]);
 
-        // FITUR: Pesan Sukses
         $_SESSION['pesan'] = "Data barang baru berhasil disimpan.";
         header("Location: index.php");
         exit;
 
     } catch (\PDOException $e) {
-        // Tangani error (misal: kode barang duplikat/UNIQUE constraint)
         if ($e->getCode() == 23000) {
             $errors[] = "Kode barang '$kode_barang' sudah ada. Silakan gunakan kode lain.";
         } else {
@@ -64,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             error_log("PDO Error (Simpan): " . $e->getMessage()); // Log error
         }
 
-        // FITUR: Pesan Gagal (Database)
         $_SESSION['errors'] = $errors;
         $_SESSION['old_input'] = $_POST;
         header("Location: tambah.php");
@@ -72,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 } else {
-    // Jika diakses langsung
     header("Location: index.php");
     exit;
 }

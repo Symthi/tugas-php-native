@@ -1,22 +1,15 @@
 <?php
-/*
- * File: update.php
- * Deskripsi: FITUR Update - Logika update data
- */
 session_start();
 require_once 'config/database.php';
 
-// Hanya proses jika request method adalah POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // 1. Ambil data
     $id = $_POST['id'];
     $kode_barang = trim($_POST['kode_barang']);
     $nama_barang = trim($_POST['nama_barang']);
     $jumlah = trim($_POST['jumlah']);
     $deskripsi = trim($_POST['deskripsi']) ?: null;
 
-    // 2. FITUR: Validasi Sisi Server
     $errors = [];
     if (empty($id) || !is_numeric($id)) {
         $errors[] = "ID barang tidak valid.";
@@ -33,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Jumlah harus berupa angka positif atau nol.";
     }
 
-    // Validasi duplikat kode (jika kode diubah dan duplikat dengan ID lain)
     if (empty($errors)) {
         try {
             $stmt_check = $pdo->prepare("SELECT id FROM barang WHERE kode_barang = ? AND id != ?");
@@ -47,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // 3. Jika ada error validasi, kembali ke form
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['old_input'] = $_POST;
@@ -55,9 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // 4. Jika validasi lolos, update ke DB
     try {
-        // FITUR Keamanan: SQL Injection dicegah
         $sql = "UPDATE barang SET 
                     kode_barang = :kode, 
                     nama_barang = :nama, 

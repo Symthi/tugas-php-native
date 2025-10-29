@@ -1,17 +1,11 @@
 <?php
-/*
- * File: edit.php
- * Deskripsi: FITUR Update - Form edit dengan prefill data
- */
 session_start();
 require_once 'config/database.php';
 
-// Ambil data error atau input lama jika ada
 $errors = $_SESSION['errors'] ?? [];
 $old_input = $_SESSION['old_input'] ?? null;
 unset($_SESSION['errors'], $_SESSION['old_input']);
 
-// Validasi ID dari URL
 $id = null;
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = (int)$_GET['id'];
@@ -21,7 +15,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     exit;
 }
 
-// Ambil data barang dari DB
 try {
     $stmt = $pdo->prepare("SELECT * FROM barang WHERE id = ?");
     $stmt->execute([$id]);
@@ -37,11 +30,10 @@ try {
     die("Gagal mengambil data untuk diedit.");
 }
 
-// Tentukan data yang akan ditampilkan (prioritaskan input lama jika ada error)
-$kode_val = $old_input['kode_barang'] ?? $barang['kode_barang'];
-$nama_val = $old_input['nama_barang'] ?? $barang['nama_barang'];
-$jumlah_val = $old_input['jumlah'] ?? $barang['jumlah'];
-$deskripsi_val = $old_input['deskripsi'] ?? $barang['deskripsi'];
+$kode_val = $old_input['kode_barang'] ?? ($barang['kode_barang'] ?? '');
+$nama_val = $old_input['nama_barang'] ?? ($barang['nama_barang'] ?? '');
+$jumlah_val = $old_input['jumlah'] ?? ($barang['jumlah'] ?? '');
+$deskripsi_val = $old_input['deskripsi'] ?? ($barang['deskripsi'] ?? '');
 
 ?>
 <!DOCTYPE html>
@@ -49,7 +41,7 @@ $deskripsi_val = $old_input['deskripsi'] ?? $barang['deskripsi'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Barang: <?php echo htmlspecialchars($barang['nama_barang'], ENT_QUOTES, 'UTF-8'); ?></title>
+    <title>Edit Barang: <?php echo htmlspecialchars($barang['nama_barang'] ?? 'Data Barang', ENT_QUOTES, 'UTF-8'); ?></title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

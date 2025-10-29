@@ -1,16 +1,8 @@
 <?php
-/*
- * File: tambah.php
- * Deskripsi: FITUR Create - Form tambah data
- */
 session_start();
-
-// Ambil data lama (jika ada) untuk pre-fill form saat validasi gagal
 $old_input = $_SESSION['old_input'] ?? [];
-// Ambil pesan error (jika ada)
 $errors = $_SESSION['errors'] ?? [];
 
-// Hapus session setelah data diambil
 unset($_SESSION['old_input']);
 unset($_SESSION['errors']);
 ?>

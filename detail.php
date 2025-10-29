@@ -1,11 +1,6 @@
 <?php
-/*
- * File: detail.php
- * Deskripsi: FITUR Read detail - Halaman detail per item
- */
 require_once 'config/database.php';
 
-// 1. Validasi ID dari URL
 $id = null;
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = (int)$_GET['id'];
@@ -14,9 +9,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     exit;
 }
 
-// 2. Ambil data dari database
 try {
-    // FITUR Keamanan: SQL Injection dicegah
     $stmt = $pdo->prepare("SELECT * FROM barang WHERE id = ?");
     $stmt->execute([$id]);
     $barang = $stmt->fetch();
@@ -67,7 +60,6 @@ try {
                 <td>
                     <?php 
                     $deskripsi = $barang['deskripsi'] ? $barang['deskripsi'] : '(Tidak ada deskripsi)';
-                    // nl2br untuk menampilkan enter
                     echo nl2br(htmlspecialchars($deskripsi, ENT_QUOTES, 'UTF-8')); 
                     ?>
                 </td>
