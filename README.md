@@ -1,5 +1,5 @@
-Nama : Elfin Sinaga
-NIM : 2409106024
+### Nama : Elfin Sinaga
+### NIM : 2409106024
 
 # Aplikasi Manajemen Inventaris Sederhana (PHP Native)
 
