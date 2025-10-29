@@ -82,22 +82,21 @@ Berikut adalah langkah-langkah lengkap untuk menjalankan aplikasi ini dari awal 
 Aplikasi sekarang seharusnya berjalan dan menampilkan data inventaris.
 
 ## Struktur Folder
-Berikut adalah struktur folder yang bersih dan benar untuk proyek ini:
-    /inventaris               (Folder root proyek Anda di C:\laragon\www)
-    |
-    |-- config/               (Folder untuk file konfigurasi)
-    |   |-- database.php      (File koneksi PDO ke database)
-    |
-    |-- setup.sql             (File script SQL untuk setup database & tabel)
-    |-- index.php             (Halaman utama: Read, Search, Pagination)
-    |-- tambah.php            (Formulir untuk Create data baru)
-    |-- simpan.php            (Logika backend untuk proses Create + Validasi)
-    |-- detail.php            (Halaman untuk Read Detail satu item)
-    |-- edit.php              (Formulir untuk Update data + Prefill data lama)
-    |-- update.php            (Logika backend untuk proses Update + Validasi)
-    |-- hapus.php             (Logika backend untuk proses Delete)
-    |-- style.css             (File styling untuk mempercantik tampilan)
-    |-- README.md             (File ini, dokumentasi proyek)
+Berikut adalah struktur folder yang bersih dan benar untuk proyek ini, disajikan sebagai daftar agar mudah dibaca:
+
+* `/inventaris` (Folder root proyek Anda di `C:\laragon\www`)
+    * `config/` (Folder untuk file konfigurasi)
+        * `database.php` (File koneksi PDO ke database)
+    * `setup.sql` (File script SQL untuk setup database & tabel)
+    * `index.php` (Halaman utama: Read, Search, Pagination)
+    * `tambah.php` (Formulir untuk Create data baru)
+    * `simpan.php` (Logika backend untuk proses Create + Validasi)
+    * `detail.php` (Halaman untuk Read Detail satu item)
+    * `edit.php` (Formulir untuk Update data + Prefill data lama)
+    * `update.php` (Logika backend untuk proses Update + Validasi)
+    * `hapus.php` (Logika backend untuk proses Delete)
+    * `style.css` (File styling untuk mempercantik tampilan)
+    * `README.md` (File ini, dokumentasi proyek)
 
 ## Contoh Environment Config
 Proyek ini adalah PHP Native dan tidak menggunakan file `.env` seperti framework modern (misal: Laravel).
